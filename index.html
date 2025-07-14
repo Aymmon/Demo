@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scaled Spa</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+  <style>
+/* Body */
+    body {
+        background: #fff;
+        color: #000;
+        min-height: 100vh;
+        font-family: 'Poppins', sans-serif;
+        padding: 0;
+        margin: 0;
+        scroll-behavior: smooth;
+
+        /* Add scroll snapping */
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+    }
+
+    .section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0b0c0f;
+        color: #fff;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+/* body end */
+
+/* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-glass {
+      padding: 1rem 2rem;
+    }
+
+    .navbar-brand-gradient {
+      font-weight: bold;
+      background: linear-gradient(to right, rgb(90, 86, 86), rgba(0, 0, 0, 1));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-link {
+      background: linear-gradient(to right, rgb(90, 86, 86), rgba(0, 0, 0, 1));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      margin-left: 1rem;
+    }
+    /* Add to your <style> block */
+    .navbar.white-text .navbar-brand-gradient,
+    .navbar.white-text .nav-link {
+        -webkit-text-fill-color: #fff !important;
+        color: #fff !important;
+        background: none !important;
+    }
+/* Navbar end */
+
+/* Hero Section */
+    #hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 80px;
+      background-color: #fdf5f5;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(122, 60, 255, 0.3) 150px, transparent 300px),
+        radial-gradient(circle at 75% 40%, rgba(129, 76, 243, 0.3)  200px, transparent 400px),
+        radial-gradient(circle at 50% 85%, rgba(89, 32, 212, 0.3)  180px, transparent 350px);
+      background-repeat: no-repeat;
+      background-size: cover;
+      animation: redGlow 10s ease-in-out infinite;
+
+    }
+    @keyframes redGlow {
+      0%, 100% {
+        background-position: 20% 30%, 75% 40%, 50% 85%;
+      }
+      50% {
+        background-position: 23% 32%, 72% 38%, 48% 87%;
+      }
+    }
+    .hero-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1600px;
+      width: 100%;
+      padding: 2rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-text {
+      flex: 1;
+      min-width: 320px;
+    }
+    .hero-text h1 {
+      font-size: 3.8rem;
+      margin-bottom: 1rem;
+      color: #000000;
+    }
+    .glass-button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .hero-video {
+      flex: 1;
+      min-width: 280px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-video video {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(139, 189, 255, 0.1);
+    }
+    .switch-word {
+      display: inline-block;
+      color: #7b3dff;
+      position: relative;
+      font-weight: bold;
+    }
+    .switch-word::after {
+      content: '|';
+      animation: blink 1s infinite;
+      margin-left: 2px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+/* Hero Section End */
+
+/* Sticky Lottie */
+    .service-wrapper {
+        position: relative;
+        padding: 2rem 0;
+        width: 100%;
+        height: 100%;
+        /* Add your background pattern here */
+        background-color: #313131;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.171) 2px, transparent 0);
+        background-size: 30px 30px;
+        background-position: -5px -5px;
+        color: #fff;
+    }
+    @keyframes moveDots {
+        0% { background-position: 0 0; }
+        100% { background-position: 30px 30px; }
+    }
+    .service-wrapper {
+    animation: moveDots 10s linear infinite;
+    }
+    #stickyLottieWrapper {
+        position: sticky;
+        top: 100px;
+        z-index: 2;
+        opacity: 1;
+        transition: opacity 0.4s ease;
+        width: 500px;
+        max-width: 90%;
+        pointer-events: none;
+        right: auto;
+        left: auto;
+        transform: none;
+    }
+    #stickyLottieWrapper lottie-player {
+    transition: opacity 0.5s;
+    opacity: 1;
+    }
+    .sticky-lottie {
+    transition: opacity 0.4s ease;
+    opacity: 0;
+    }
+    .sticky-lottie.active {
+    opacity: 1;
+    }
+    .service-section {
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 1rem 0;
+    }
+    .col-md-6.d-flex.flex-column.justify-content-between {
+        gap: 0;
+        padding: 0;
+    }
+    @media (max-width: 768px) {
+    #stickyLottieWrapper {
+        display: none;
+    }
+    }
+    .service-intro {
+        text-align: center;
+        position: relative;
+        padding: 60px 20px;
+    }
+
+    .service-intro h2 {
+        font-size: 4rem !important;
+        font-weight: 1000;
+        position: relative;
+        display: inline-block;
+        color: #fff;
+        z-index: 1;
+        background: linear-gradient(90deg, #ffffff 0%, #7b3dff 50%, #ffffff 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 8s linear infinite;
+        opacity: 0;
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .service-intro h2.animate {
+        animation: fadeInUp 1s ease-out forwards, shine 8s linear infinite;
+    }
+    @keyframes shine {
+        0% {
+        background-position: 200% center;
+        }
+        100% {
+        background-position: -200% center;
+        }
+    }
+    .service-section h2 {
+            font-size: 4rem !important;
+            font-weight: 800;
+            color: #fff !important;
+            opacity: 0;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transform: translateY(30px);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                        0 0 20px rgba(255, 255, 255, 0.6),
+                        0 0 30px rgba(255, 255, 255, 0.4);
+        }
+    @keyframes glowPulse {
+        0%, 100% {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                        0 0 20px rgba(255, 255, 255, 0.6),
+                        0 0 30px rgba(255, 255, 255, 0.4);
+        }
+        50% {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+                        0 0 30px rgba(255, 255, 255, 0.8),
+                        0 0 40px rgba(255, 255, 255, 0.6);
+        }
+    }
+
+    .service-section h2.animate {
+        opacity: 1;
+        transform: translateY(0);
+        animation: glowPulse 2s ease-in-out infinite;
+    }
+  /* Optional: Background light effect behind text */
+    .service-intro::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        height: 150px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+        transform: translate(-50%, -50%);
+        z-index: 0;
+        animation: pulse 4s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .service-intro h2 {
+        opacity: 0;
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .service-intro h2.animate {
+        animation: fadeInUp 1s ease-out forwards;
+    }
+
+/* Service Section End*/
+
+/* Image Float */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        margin-bottom: 20px;
+        position: relative;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
+        perspective: 1000px; /* enable 3D transforms */
+        transition: transform 0.3s ease;
+    }
+    .glass-card-gradient {
+        background: rgba(29, 31, 32, 0.904)
+        radial-gradient(rgba(255, 255, 255, 0.712) 10%, transparent 1%);
+        background-size: 11px 11px;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        padding: 30px 25px;
+        flex: 1;
+        color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: default;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+    }
+    .image-float {
+        width: 480px;
+        height: auto;
+        object-fit: cover;
+        animation: floatUpDown 2s ease-in-out infinite;
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease;
+        position: absolute;
+    }
+    @keyframes floatUpDown {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+    .card-content { margin-top: 50px; text-align: center; }
+    .card-content h5 {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #ffd700; /* gold accent */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .card-content p {
+        font-family: 'Georgia', serif;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        font-style: normal;
+        color: #ddd;
+    }
+    .card-content p em {
+        display: block;
+        margin-top: 10px;
+        font-style: italic;
+        font-weight: 600;
+        color: #bbb;
+        font-size: 0.9rem;
+    }
+    /* top card 1 and 2 */
+    .highlight-animate p {
+        font-family: 'Georgia', serif;
+        font-size: 2rem;       /* bigger text */
+        font-weight: 700;        /* thick and bold */
+        line-height: 1.4;
+        color: #7b3dff;
+        margin: 0;
+        animation: softGlow 4s ease-in-out infinite;
+        text-shadow:
+        2px 2px 5px rgba(122, 60, 255, 0.3),
+        0 0 12px rgba(255, 255, 255, 0.7);
+    }
+
+    .text-with-arrow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .arrow {
+        font-size: 2.5rem;
+        color: #007bff;  /* bright blue */
+        font-weight: 900;
+        user-select: none;
+        /* subtle glow on arrow */
+        text-shadow:
+        1px 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 8px rgba(0, 123, 255, 0.8);
+        animation: softGlow 4s ease-in-out infinite;
+    }
+    /* Base animation styles */
+    .fade-top, .fade-left {
+        opacity: 0;
+        animation-fill-mode: forwards;
+        animation-duration: 1s;
+        animation-timing-function: ease-out;
+    }
+
+    /* Fade in from top */
+    .fade-top {
+        transform: translateY(-30px);
+        animation-delay: 0.2s;
+    }
+
+    /* Fade in from left */
+    .fade-left {
+        transform: translateX(-30px);
+        animation-delay: 0.6s;
+    }
+
+    /* Keyframes */
+    @keyframes fadeInTop {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    .fade-top.animate {
+        animation-name: fadeInTop;
+    }
+
+    .fade-left.animate {
+        animation-name: fadeInLeft;
+    }
+    /* top card 1 and 2 */
+    /* keep the glow animation */
+    @keyframes softGlow {
+        0%, 100% {
+            color: #ae89ff;
+            text-shadow:
+            1px 1px 3px rgba(122, 60, 255, 0.3),
+            0 0 4px rgba(255, 255, 255, 0.3);
+        }
+        50% {
+            color: #ffffff;
+            text-shadow:
+            2px 2px 5px rgba(0, 0, 0, 0.5),
+            0 0 12px rgba(255, 255, 255, 0.7);
+        }
+    }
+
+    .tall-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: visible; /* <-- add this line */
+        position: relative;
+    }
+    .card-3 {
+        background-image: url('cardbg3.jpg'); /* replace with your actual path */
+        background-size: cover;        /* makes it fill the card */
+        background-position: center;   /* centers the image */
+        background-repeat: no-repeat;  /* prevents tiling */
+    }
+    .card-4 {
+        background-image: url('cardbg2.jpg'); /* replace with your actual path */
+        background-size: cover;        /* makes it fill the card */
+        background-position: center;   /* centers the image */
+        background-repeat: no-repeat;  /* prevents tiling */
+    }
+    @media (min-width: 768px) {
+        .left-top-cards { display: flex; gap: 20px; }
+        .left-top-cards .glass-card { flex: 1; }
+    }
+/* Image Float */
+
+/* work */
+    /* Container Title */
+    .container h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #7b3dff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Filter Buttons */
+    .filter-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: #333;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    }
+
+    .filter-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: #000;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Work Card */
+    .work {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .work h5 {
+    font-size: 1.2rem;
+    color: #111;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+    }
+
+    /* Tags */
+    .tag {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin: 4px 6px 0 0;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* Image Styling */
+    .work-img {
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background-image 0.5s ease-in-out;
+    }
+
+    .img-hover1 {
+        background-image: url('work1.jpg');
+    }
+
+    .work:hover .img-hover1 {
+        background-image: url('work1hover.jpg');
+    }
+    .img-hover2 {
+        background-image: url('work2.jpg');
+    }
+
+    .work:hover .img-hover2 {
+        background-image: url('work2hover.jpg');
+    }
+    .img-hover3 {
+        background-image: url('work3.jpg');
+    }
+
+    .work:hover .img-hover3 {
+        background-image: url('work3hover.jpeg');
+    }
+
+/* work */
+
+/* Client logo */
+    /* .client-title {
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #111;
+    }
+    .highlight-word {
+    color: #7a3cff;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    }
+
+    .highlight-word::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 6px;
+    background-color: rgba(122, 60, 255, 0.3);
+    border-radius: 4px;
+    animation: underlineSlide 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes underlineSlide {
+    from {
+        width: 80%;
+        left: 10%;
+    }
+    to {
+        width: 100%;
+        left: 0;
+    }
+    }
+    .client-logo {
+    max-width: 100%;
+    height: 50px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+    }
+    .client-logo:hover {
+    filter: grayscale(0%);
+    } */
+
+/* Client logo */
+/*  */
+    /* Galaxy Container */
+    .floating-logo-space {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle at center, #0b0f1a, #000);
+    overflow: hidden;
+    }
+
+    /* Title */
+    .client-title-wrapper {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    }
+    .client-title {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 600;
+    }
+    .highlight-word {
+    color: #7b3dff;
+    }
+
+    /* Center brand title */
+    .center-brand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    }
+    .center-brand h2 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(45deg, #7b3dff, #c28eff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(123, 61, 255, 0.4);
+    animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 30px rgba(123, 61, 255, 0.4); }
+    50% { text-shadow: 0 0 50px rgba(123, 61, 255, 0.9); }
+    }
+
+    /* Logos */
+    .logo-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    }
+    .floating-logo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    background: white;
+    padding: 6px;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(123, 61, 255, 0.4);
+    animation: floatRandom 18s infinite ease-in-out;
+    opacity: 0.95;
+    pointer-events: none;
+    }
+    .floating-logo::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 8px; height: 8px;
+    background: #7b3dff;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #7b3dff;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    animation: glowTrail 2.5s ease-out infinite;
+    }
+    @keyframes glowTrail {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+    }
+    @keyframes floatRandom {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(200px, -120px); }
+    50%  { transform: translate(-250px, 80px); }
+    75%  { transform: translate(180px, 140px); }
+    100% { transform: translate(0, 0); }
+    }
+
+
+/*  */
+  </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg glass navbar-glass">
+        <div class="container-fluid">
+        <a class="navbar-brand navbar-brand-gradient" href="#">Scaled Spas</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-container">
+        <div class="hero-text">
+            <h1 class="animated-text fade-top">
+            We blend <span class="switch-word">creativity</span><br>
+            One agency. Countless capabilities.
+            </h1>
+            <a href="#services" class="glass-button">Get Started</a>
+        </div>
+        <div class="hero-video fade-left">
+            <video autoplay muted loop playsinline>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+            </video>
+        </div>
+        </div>
+    </section>
+
+    {{-- Service --}}
+    <section class="service-wrapper">
+        <div class="container">
+            <div class="service-intro text-center">
+                <h2>We put social at the center <br>of everything we do</h2>
+            </div>
+            <div class="row align-items-stretch">
+            <!-- LEFT: All service descriptions -->
+            <div class="col-md-6 d-flex flex-column justify-content-between">
+                <div class="service-section" data-index="0">
+                    <h2 class="data-index=0">Scale Beauty Courses</h2>
+                    <p class="fade-top">is the educational branch of Scaled Spa, offering high-quality training programs for aspiring and professional beauty experts. Our courses are designed to empower individuals with the skills, techniques, and confidence needed to succeed in the beauty and wellness industry.</p>
+                </div>
+                <div class="service-section" data-index="1">
+                    <h2 class="data-index=1">Professionals With Ads</h2>
+                    <p class="fade-top">marketing service dedicated to helping professionals grow their brand, attract clients, and increase visibility through effective advertising strategies. We specialize in creating targeted ad campaigns tailored to the unique needs of entrepreneurs, freelancers, and service-based businesses.</p>
+                </div>
+                <div class="service-section" data-index="2">
+                    <h2 class="data-index=0">All Girls Sales Team</h2>
+                    <p class="fade-top">dynamic and results-driven sales agency led by a team of talented women experts. We specialize in driving sales growth for businesses by utilizing innovative techniques, customer engagement strategies, and personalized outreach.</p>
+                </div>
+            </div>
+            <!-- RIGHT: Sticky Lottie -->
+            <div class="col-md-6 d-flex flex-column align-items-center">
+                <div id="stickyLottieWrapper" class="sticky-lottie active">
+                <lottie-player
+                    id="stickyLottie"
+                    src="https://assets3.lottiefiles.com/packages/lf20_9cyyl8i4.json"
+                    background="transparent"
+                    speed="1"
+                    style="width: 100%;"
+                    loop
+                    autoplay>
+                </lottie-player>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Image Float --}}
+    <div class="container py-5">
+        <div class="row">
+            <!-- Left column -->
+            <div class="col-md-6 d-flex flex-column justify-content-between">
+                <!-- Top 2 cards -->
+                <div class="left-top-cards mb-3">
+                    <div class="glass-card-gradient fade-top">
+                        <div class="card-content highlight-animate text-with-arrow">
+                        <p>Learn to grow your business</p>
+                        <span class="arrow arrow-down">↓</span>
+                        </div>
+                    </div>
+                    <div class="glass-card-gradient fade-left">
+                        <div class="card-content highlight-animate text-with-arrow">
+                        <p>We help you to achieve your business full potential</p>
+                        <span class="arrow">→</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bottom full width card -->
+                <div class="glass-card card-3 fade-top">
+                    <img src="laptop3d.png" class="image-float" alt="Image 3">
+                </div>
+            </div>
+
+            <!-- Right column -->
+            <div class="col-md-6">
+            <div class="glass-card tall-card card-4 h-100 fade-left">
+                <img src="laptopig.png" class="image-float" alt="Image 4">
+            </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Work --}}
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-semibold fade-top">Explore what you can do with Scaled Spas</h1>
+            <div class="d-flex gap-2 fade-top">
+              <button class="filter-btn">All services ▼</button>
+              <button class="filter-btn">All industries ▼</button>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            <!-- work 1 -->
+            <div class="col-md-4 fade-left">
+              <div class="work">
+                <div class="work-img img-hover1"></div>
+                <div class="p-3">
+                  <h5 class="fw-semibold">Video Editing</h5>
+                  <div class="d-flex flex-wrap">
+                    <div class="tag">Adobe After Effects</div>
+                    <div class="tag">Adobe Premiere Pro</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- work 2 -->
+            <div class="col-md-4 fade-left">
+              <div class="work">
+                <div class="work-img img-hover3"></div>
+                <div class="p-3">
+                  <h5 class="fw-semibold">Full Stack Web Development</h5>
+                  <div class="d-flex flex-wrap">
+                    <div class="tag">HTML</div>
+                    <div class="tag">CSS</div>
+                    <div class="tag">LARAVEL</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- work 3 -->
+            <div class="col-md-4 fade-left">
+              <div class="work">
+                 <div class="work-img img-hover2"></div>
+                <div class="p-3">
+                  <h5 class="fw-semibold">Social Media Manager</h5>
+                  <div class="d-flex flex-wrap">
+                    <div class="tag">Instagram</div>
+                    <div class="tag">Facebook</div>
+                    <div class="tag">Tiktok</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    {{-- Logoslider --}}
+    <section class="floating-logo-space">
+    <div class="client-title-wrapper">
+        <h1 class="client-title">
+        We’re grateful to work with the <span class="highlight-word">greatest brands</span>, all across the world.
+        </h1>
+    </div>
+
+    <!-- CENTER LOGO OR TITLE -->
+    <div class="center-brand">
+        <h2>Scaled Spa</h2>
+    </div>
+
+    <!-- FLOATING LOGOS -->
+    <div class="logo-container">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Duracell-logo.png" class="floating-logo">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Indeed-logo-500x281.png" class="floating-logo">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Duracell-logo.png" class="floating-logo">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Indeed-logo-500x281.png" class="floating-logo">
+                <img src="https://1000logos.net/wp-content/uploads/2021/05/Duracell-logo.png" class="floating-logo">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Indeed-logo-500x281.png" class="floating-logo">
+                <img src="https://1000logos.net/wp-content/uploads/2021/05/Duracell-logo.png" class="floating-logo">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Indeed-logo-500x281.png" class="floating-logo">
+        <!-- Add more logos -->
+    </div>
+    </section>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const logos = document.querySelectorAll(".floating-logo");
+        logos.forEach((logo) => {
+        const offsetX = Math.floor(Math.random() * 300) + 120; // larger spread
+        const offsetY = Math.floor(Math.random() * 300) + 120;
+        const x = (Math.random() < 0.5 ? -1 : 1) * offsetX;
+        const y = (Math.random() < 0.5 ? -1 : 1) * offsetY;
+        logo.style.top = `calc(50% + ${y}px)`;
+        logo.style.left = `calc(50% + ${x}px)`;
+        logo.style.animationDuration = `${16 + Math.random() * 6}s`;
+        logo.style.animationDelay = `${Math.random() * 4}s`;
+        });
+    });
+    </script>
+
+
+    {{-- contact --}}
+     <div class="container my-5 text-center">
+        <iframe
+            src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10uLfs8tqPWxsJqojh5HlDdmaDUbdPzzSPChEHDkMCBamfXsMYo2pcm6DsgUQ1l_wW3-lsM_ah"
+            style="border: 0"
+            width="100%"
+            height="600"
+            frameborder="0"
+            scrolling="yes">
+        </iframe>
+     </div>
+<script>
+    $(document).ready(function () {
+        // Hero typing effect
+        const words = ["creativity", "strategy"];
+        let index = 0, charIndex = 0, isDeleting = false;
+        const speed = 100, pause = 1500;
+
+        function typeEffect() {
+            const currentWord = words[index];
+            if (!isDeleting && charIndex <= currentWord.length) {
+                $(".switch-word").text(currentWord.substring(0, charIndex++));
+                setTimeout(typeEffect, speed);
+            } else if (isDeleting && charIndex >= 0) {
+                $(".switch-word").text(currentWord.substring(0, charIndex--));
+                setTimeout(typeEffect, speed / 2);
+            } else {
+                if (isDeleting) index = (index + 1) % words.length;
+                isDeleting = !isDeleting;
+                setTimeout(typeEffect, pause);
+            }
+        }
+        typeEffect();
+
+        // Navbar color change on scroll to white
+        const $navbar = $('.navbar');
+        const $serviceSection = $('.service-wrapper');
+
+        function updateNavbarColor() {
+            if (!$serviceSection.length) return;
+            const sectionTop = $serviceSection.offset().top;
+            const scrollPos = $(window).scrollTop();
+            if (scrollPos + 60 >= sectionTop) {
+                $navbar.addClass('white-text');
+            } else {
+                $navbar.removeClass('white-text');
+            }
+        }
+
+        // Section Text Fade-in Animation
+        function animateSectionText() {
+            $('.service-section h2, .service-intro h2').each(function () {
+                const $this = $(this);
+                const rect = this.getBoundingClientRect();
+                const windowHeight = $(window).height();
+                if (rect.top < windowHeight - 100) {
+                    $this.addClass('animate');
+                }
+            });
+        }
+
+        // Sticky Lottie Animation
+        const animations = [
+            "https://assets9.lottiefiles.com/packages/lf20_zgntfhso.json",
+            "https://assets6.lottiefiles.com/packages/lf20_jcikwtux.json",
+            "https://assets2.lottiefiles.com/packages/lf20_usmfx6bp.json"
+        ];
+        let activeIndex = -1;
+        const $wrapper = $("#stickyLottieWrapper");
+        const $sections = $(".service-section");
+
+        function updateSticky() {
+            if (!$wrapper.length || !$sections.length) return;
+            const winHeight = $(window).height();
+
+            $sections.each(function () {
+                const $section = $(this);
+                const rect = this.getBoundingClientRect();
+                const index = parseInt($section.data("index"));
+                const isVisible = rect.top < winHeight * 0.5 && rect.bottom > winHeight * 0.3;
+
+                if (isVisible && activeIndex !== index) {
+                    activeIndex = index;
+                    $wrapper.stop().animate({ opacity: 0 }, 400, () => {
+                        $wrapper.empty();
+                        const newPlayer = $(`
+                            <lottie-player
+                                src="${animations[index]}"
+                                background="transparent"
+                                speed="1"
+                                style="width: 100%;"
+                                loop
+                                autoplay>
+                            </lottie-player>
+                        `);
+                        $wrapper.append(newPlayer);
+                        $wrapper.stop().animate({ opacity: 1 }, 400);
+                    });
+                    return false;
+                }
+            });
+        }
+
+        // Fade-in cards when in viewport
+        function triggerCardFadeIn() {
+            $('.fade-top, .fade-left').each(function () {
+                const $el = $(this);
+                const rect = this.getBoundingClientRect();
+                const windowHeight = $(window).height();
+                if (rect.top < windowHeight - 100) {
+                    $el.addClass('animate');
+                }
+            });
+        }
+
+        // Debounce helper (optional performance boost)
+        function debounce(func, wait = 100) {
+            let timeout;
+            return function () {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, arguments), wait);
+            };
+        }
+
+        // Initial Run
+        updateNavbarColor();
+        updateSticky();
+        animateSectionText();
+        triggerCardFadeIn(); // ✅ run on load
+
+        // Scroll/Resize Event Binding
+        $(window).on("scroll resize", debounce(() => {
+            updateNavbarColor();
+            updateSticky();
+            animateSectionText();
+            triggerCardFadeIn(); // ✅ run on scroll/resize
+        }));
+    });
+</script>
+</body>
+</html>

@@ -14,10 +14,10 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 
-  <style>
+<style>
 /* Body */
     body {
-        background: #fff;
+        background: #ffffff;
         color: #000;
         min-height: 100vh;
         font-family: 'Poppins', sans-serif;
@@ -784,6 +784,74 @@
 
 
 /*  */
+/* blog */
+     /* blog   */
+    .blog-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .blog img.profile {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+    }
+
+    .blog .tag {
+      background-color: #f0f1f5;
+      border-radius: 20px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      margin: 0.2rem;
+      display: inline-block;
+    }
+
+    .blog .sample-img {
+      border-radius: 1rem;
+      width: 100%;
+      margin: 1rem 0;
+      object-fit: cover;
+    }
+
+    .blog .btn-dark {
+      border-radius: 1.5rem;
+      padding: 0.6rem 1.5rem;
+    }
+
+    .blog .nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+/* blog */
+    /* footer  */
+
+    .footer a:hover {
+    text-decoration: underline;
+    color: #007bff;
+    }
+    .footer .btn:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -817,7 +885,7 @@
         </div>
         <div class="hero-video fade-left">
             <video autoplay muted loop playsinline>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            <source src="herovideo.mp4" type="video/mp4" />
             Your browser does not support the video tag.
             </video>
         </div>
@@ -957,7 +1025,7 @@
     </div>
 
     <!-- {{-- Logoslider --}} -->
-    <section class="floating-logo-space">
+    <section class="floating-logo-space fade-top">
     <div class="client-title-wrapper">
         <h1 class="client-title">
         We’re grateful to work with the <span class="highlight-word">greatest brands</span>, all across the world.
@@ -999,9 +1067,94 @@
     });
     </script>
 
+    <!-- blog -->
+    <div class="container py-5 blog fade-top">
+    <h2 class="text-center fw-semibold mb-4">Social Media</h2>
 
+    <div class="d-flex justify-content-center gap-2 mb-4">
+        <button class="btn btn-dark rounded-pill px-4">Instagram</button>
+        <button class="btn btn-light rounded-pill px-4">Facebook</button>
+    </div>
+
+    <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+        <div class="blog-card">
+            <div class="d-flex align-items-center mb-3">
+            <img src="talent5.png" alt="Anna" class="profile">
+            <div>
+                <h5 class="mb-0 fw-semibold">scaledspas</h5>
+                <small>Gabriel Correa</small>
+            </div>
+            </div>
+
+            <p class="fw-semibold mb-1">Entrepreneur</p>
+            <div>
+            <span class="tag">beauty</span>
+            <span class="tag">scale</span>
+            <span class="tag">professionals</span>
+            </div>
+            <img src="blog1.jpg" class="sample-img" alt="Work Sample">
+
+            <div class="d-flex justify-content-between align-items-center">
+            <button class="nav-btn"><span>&larr;</span></button>
+            <button class="btn btn-dark">Book a call</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-4">
+        <div class="blog-card">
+            <div class="d-flex align-items-center mb-3">
+            <img src="talent5.png" alt="Valencia" class="profile">
+            <div>
+                <h5 class="mb-0 fw-semibold">scaledspas</h5>
+                <small>Gabriel Correa</small>
+            </div>
+            </div>
+            <p class="fw-semibold mb-1">Entrepreneur</p>
+            <div>
+            <span class="tag">beauty</span>
+            <span class="tag">scale</span>
+            <span class="tag">professionals</span>
+            </div>
+            <img src="blog2.jpg" class="sample-img" alt="Work Sample">
+
+            <div class="d-flex justify-content-between align-items-center">
+            <button class="nav-btn"><span>&larr;</span></button>
+            <button class="btn btn-dark">Book a call</button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-4">
+        <div class="blog-card">
+            <div class="d-flex align-items-center mb-3">
+            <img src="talent5.png" alt="Ruzanna" class="profile">
+            <div>
+                <h5 class="mb-0 fw-semibold">scaledspas</h5>
+                <small>Gabriel Correa</small>
+            </div>
+            </div>
+            <p class="fw-semibold mb-1">Entrepreneur</p>
+            <div>
+            <span class="tag">beauty</span>
+            <span class="tag">scale</span>
+            <span class="tag">professionals</span>
+            </div>
+            <img src="blog3.jpg" class="sample-img" alt="Work Sample">
+            <div class="d-flex justify-content-between align-items-center">
+            <button class="nav-btn"><span>&larr;</span></button>
+            <button class="btn btn-dark">Book a call</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
     <!-- {{-- contact --}} -->
-     <div class="container my-5 text-center">
+     <div class="container my-5 text-center fade-top">
         <iframe
             src="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ10uLfs8tqPWxsJqojh5HlDdmaDUbdPzzSPChEHDkMCBamfXsMYo2pcm6DsgUQ1l_wW3-lsM_ah"
             style="border: 0"
@@ -1011,6 +1164,71 @@
             scrolling="yes">
         </iframe>
      </div>
+
+    <div class="container footer fade-top py-5">
+        <div class="row g-4">
+          <!-- Contact Box -->
+          <div class="col-lg-4 ">
+            <div class="bg-white rounded-4 shadow p-4 h-100">
+              <h5 class="fw-bold mb-3">Get in touch</h5>
+              <p class="mb-2">
+                <span class="me-2 text-primary">🌐</span>
+                420 2nd St, Office 316 San Francisco, CA 12345, US
+              </p>
+              <p class="mb-2">
+                <span class="me-2 text-danger">📞</span>
+                (123) 321-1234
+              </p>
+              <p class="mb-3">
+                <span class="me-2 text-dark">📧</span>
+                scaledspas@gmail.com
+              </p>
+              <div class="d-flex gap-2">
+                <a href="#" class="btn btn-light rounded-3"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="btn btn-light rounded-3"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="btn btn-light rounded-3"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="btn btn-light rounded-3"><i class="bi bi-twitter-x"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Groups -->
+          <div class="col-lg-8">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 g-4">
+              <div class="col">
+                <ul class="list-unstyled">
+                  <li><a href="#" class="text-dark text-decoration-none">Pricing</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Portfolio</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Case studies</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">About us</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Services</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Blog</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <ul class="list-unstyled">
+                  <li><a href="#" class="text-dark text-decoration-none">Awesomic help center</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Founders social club</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Marketing</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Terms & policies</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Awesomic for talents</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">Video editor</a></li>
+                </ul>
+              </div>
+              <div class="col">
+                <ul class="list-unstyled">
+                  <li><a href="#" class="text-dark text-decoration-none">product designer</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">ui/ux designer</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">marketing designer</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">creative designer</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">freelance designer</a></li>
+                  <li><a href="#" class="text-dark text-decoration-none">logo designer</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 <script>
     $(document).ready(function () {
         // Hero typing effect
@@ -1063,7 +1281,7 @@
 
         // Sticky Lottie Animation
         const animations = [
-            "https://assets9.lottiefiles.com/packages/lf20_zgntfhso.json",
+            "https://assets3.lottiefiles.com/packages/lf20_9cyyl8i4.json",
             "https://assets6.lottiefiles.com/packages/lf20_jcikwtux.json",
             "https://assets2.lottiefiles.com/packages/lf20_usmfx6bp.json"
         ];
